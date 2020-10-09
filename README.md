@@ -4,23 +4,35 @@ This is an ansible playbook that deploys a set of necessities I need to manage a
 
 ## Usage
 
+### Install your usual tools
 
+Installs `tmux`, `vim`, `jq`, `net-tools`, `nmap`, `ncdu`, `less`, `git`, `mosh`.
 
-## Packages
+```shell
+# All tools
+ansible-playbook -i '<host>,' packages.yml 
 
-Packages that need to be installed as `root`.
+# Skip mosh
+ansible-playbook -i '<host>,' packages.yml --skip-tags mosh
 
-- tmux
-- vim
-- jq
-- nmap
-- ncdu
-- less
+```
 
-## Configs
+### Install configs
 
-- `~/.tmux.conf`
-- `~/.vimrc`
-- `~/.bashrc`
-- `~/.bash_aliases`
-- `~/.bash_functions`
+#### Bash
+
+* Bash aliases for `ls -la`, `kubectl`, `docker`, `docker-compose`, `git`.
+* Custom Bash promt
+* Default `SHELL`, `EDITOR`, and `VISUAL` variables
+
+#### Tmux
+
+* Prefix mapped to `Ctrl-a`
+* base-index = 1
+* center tabs
+* history = 50k
+
+```shell
+ansible-playbook -i '<host>,' configs.yml
+```
+
