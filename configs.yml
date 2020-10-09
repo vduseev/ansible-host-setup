@@ -1,0 +1,45 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Configs | Install | Bash config
+      copy:
+        src: "{{ item }}"
+        dest: $HOME
+      with_items:
+        - files/.bashrc
+        - files/.bash_aliases
+        - files/.bash_functions
+      tags:
+        - bash
+
+    - name: Configs | Install | Tmux config
+      copy:
+        src: files/.tmux.conf
+        dest: $HOME
+      tags:
+        - tmux
+
+    - name: Configs | Install | Vim | Vim config
+      copy:
+        src: files/.vimrc
+        dest: $HOME
+      tags:
+        - never
+        - vim
+
+    - name: Configs | Install | Vim | Vundle plugin manager
+      git:
+        repo: https://github.com/VundleVim/Vundle.vim.git
+        dest: $HOME/.vim/bundle/Vundle.vim
+      tags:
+        - never
+        - vim
+
+    - name: Configs | Install | Vim | Install vim plugins
+      command:
+        cmd: vim +PluginInstall +qall
+      tags:
+        - never
+        - vim
+      

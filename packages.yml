@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Packages | Install tools
+      apt:
+        name:
+          - tmux
+          - vim
+          - jq
+          - net-tools
+          - nmap
+          - ncdu
+          - less
+          - git
+
+    - name: Packages | Install MOSH
+      apt:
+        name:
+          - mosh
+      tags:
+        - mosh

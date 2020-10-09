@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Install tmuxinator | Install ruby
+      become: true
+      apt:
+        name: ruby-full
+
+    - name: Install tmuxinator | Install tmuxinator gem
+      become: true
+      gem:
+        name: tmuxinator
+        state: present
+        include_dependencies: true
+        user_install: false
+      register: tmuxinator_result
+
+    - name: What hapaned
+      debug:
+        msg: "{{ tmuxinator_result }}"

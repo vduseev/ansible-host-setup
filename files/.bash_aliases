@@ -1,0 +1,5 @@
+alias ll="ls -lha"
+alias k="kubectl"
+alias d="docker"
+alias g="git"
+alias c="docker-compose"
